@@ -35,8 +35,6 @@ class tumblr(object):
 	print "Link your blog:  "
 	blog = raw_input("> ")
 	
-	print "1. Create text\n2. Create quote\n3. Create Link"
-	
 	def post_text(self):
 		print "Whats on your mind? "
 		text = raw_input("> ")
