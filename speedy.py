@@ -78,22 +78,22 @@ def Fb():
 		assert False
 
 
-	while prompt != 5:
+	while prompt != 'quit':
 
-		def update():
-			new_status = raw_input("> ")
-			graph.put_object("me", "feed", message=new_status )
-			prompt = 5		
-			restart()
+	def update():
+		new_status = raw_input("> ")
+		graph.put_object("me", "feed", message=new_status )
+		prompt = 5		
+		restart()
 
-
+	##function doesn't work right now 
 	def number_friends():
 
 		friend_list  = len([friend['name'] for friend in friends['data']])
 		print friend_list
 		restart()
 
-	if prompt == 1:
+	if prompt == "!fb status":
 		update()
 
 	else:
