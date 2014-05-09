@@ -29,7 +29,7 @@ command = input("> ")
 
 
 ##tumblr stuff
-class tumblr(self):
+class tumblr(object):
 
  	client.info()
 	print "Link your blog:  "
