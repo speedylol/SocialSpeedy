@@ -14,10 +14,10 @@ import pytumblr
 token = 'your token here'
 
 client = pytumblr.TumblrRestClient(
-	'n5r51TdkdkOeDdzf5aGA0GMPkobDiddHkytZU55CceSUNr1Rri',
-	'qUMJUNKoZfdomw5nUZ3kXD1SRFgXEnHCCJdleVlVAnZg1MxVCv',
-	'6KV4oayviBIiUhfCJ6EQIFPkhEG1fSc2YKTxTlryBhlXpckkxZ',
-	'kBzG3Qu5h4BHaMNG204rorvnUoCDMFzyuPVgn7X9WtlIXRh7fd'
+'n5r51TdkdkOeDdzf5aGA0GMPkobDiddHkytZU55CceSUNr1Rri',
+'qUMJUNKoZfdomw5nUZ3kXD1SRFgXEnHCCJdleVlVAnZg1MxVCv',
+'6KV4oayviBIiUhfCJ6EQIFPkhEG1fSc2YKTxTlryBhlXpckkxZ',
+'kBzG3Qu5h4BHaMNG204rorvnUoCDMFzyuPVgn7X9WtlIXRh7fd'
 )
 
 #function to restart script after a command is complete
@@ -25,74 +25,71 @@ def restart():
 	py = sys.executable
 	os.execl(py, py, * sys.argv)
 
-command = input("> ")
+command = raw_input("> ")
 
+if command == 'quit':
+	sys.exit()
 
 ##tumblr stuff
-class tumblr(object):
+def tumblr():
 
  	client.info()
-	print "Link your blog:  "
+	print "Link your blog: "
 	blog = raw_input("> ")
-	
-	def post_text(self):
+
+	def post_text():
 		print "Whats on your mind? "
 		text = raw_input("> ")
-	
 		client.create_text(blog, body=text)
 		restart()
 
-	def post_quote(self):
+	def post_quote():
 		user_quote = raw_input("> ")
 		client.create_quote(blog, quote=user_quote)	
 		restart()
 
-	def post_link(self):
+	def post_link():
 		user_link = raw_input("> ")
 		client.create_link(blog, url=user_link)
 		restart()
 
+	if command == '!tumblr text':
+		post_text()
+
+	elif command == '!tumblr quote':
+		post_quote()
+
+	elif command == '!tumblr link':
+		post_link()
+
+if command[:7] == '!tumblr':
+	tumblr()
+	
 ##Facebook stuff
 
-class Fb(object):
+def Fb():
 
 	graph = facebook.GraphAPI(token)
 	profile = graph.get_object("me")
 	friends = graph.get_connections("me", "friends")
 
-	while prompt != 'quit':
-
-	def update(self):
+	def update():
 		new_status = raw_input("> ")
 		graph.put_object("me", "feed", message=new_status )
 		restart()
 
 
 if command == 'help':
-	print """
-		commands:
-		!fb status - posts a facebook status
-		!tumblr text - creates tumblr text post
-		!tumblr quote - creates tumblr quote post
-		!tumblr link - creates tumblr link post
-		quit - exits the program
+	print """	
+commands:
+!fb status - posts a facebook status
+!tumblr text - creates tumblr text post
+!tumblr quote - creates tumblr quote post
+!tumblr link - creates tumblr link post
+quit - exits the program
 		"""
+	restart()
 
-elif command == '!fb status':
+if command == '!fb status':
 	command = fb()
 	command.status()
-
-elif command == '!tumblr text':
-	command = tumblr()
-	command.post_text()
-
-elif command == '!tumblr quote':
-	command = tumblr()
-	command.post_quote()
-	
-elif command == '!tumblr link':
-	command = tumblr()
-	command.post_link()
-
-elif command == 'quit':
-	sys.exit()
