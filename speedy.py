@@ -10,7 +10,7 @@ import os
 import pytumblr
 
 #need your own access token to use facebook stuff
-#go to developers.facebook.com/tools/explorer/ for your personal access token
+#go to https://developers.facebook.com/tools/ then click "Graph API Explorer" for your personal access token
 token = 'your token here'
 
 client = pytumblr.TumblrRestClient(
@@ -69,6 +69,7 @@ if command[:7] == '!tumblr':
 
 def Fb():
 
+	#App Token CAADjolCF9AYBAFo4mdhWSHLmqzYRPMjS54tIepo9Pe0ITuMhriYzExFKCOnCHM6ZAZAC6dvRp0ZBtoBPlLgk7vvWaaG7TJbBZBULZC2C7FoZBbeFYitoGkXBV9OK5v1uRwf1JMmoDefWfFhZBPhqKHW0UV3uC7EGnWWZAZCjKu7sTIkdnGT63tZAmHYIxdW9oflRZCuuKVcMfA74Ld5jP02xLO4b21p90JjnZA8ZD
 	graph = facebook.GraphAPI(token)
 	profile = graph.get_object("me")
 	friends = graph.get_connections("me", "friends")
